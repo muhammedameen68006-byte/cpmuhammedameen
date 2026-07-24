@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammed Ameen CP — Graphic Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10;
+    --bg-alt:#131318;
+    --surface:#1a1a21;
+    --surface-2:#202028;
+    --ink:#f3f1ec;
+    --ink-dim:#9a9aa5;
+    --accent:#ff5a3c;
+    --accent-2:#f2c14e;
+    --line:rgba(243,241,236,0.12);
+    --line-strong:rgba(243,241,236,0.22);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size:26px 26px;
+    pointer-events:none;
+    z-index:0;
+  }
+  .wrap{max-width:1140px;margin:0 auto;padding:0 32px;position:relative;z-index:1;}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;}
+  .label{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--accent-2);
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    background:rgba(12,12,16,0.72);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;}
+  .logo{
+    font-family:'Space Grotesk',sans-serif;
+    font-weight:700;
+    font-size:18px;
+    letter-spacing:-0.01em;
+  }
+  .logo span{color:var(--accent);}
+  .navlinks{display:flex;gap:36px;list-style:none;}
+  .navlinks a{
+    color:var(--ink-dim);
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+    transition:color .25s ease;
+    position:relative;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--ink);}
+  .navlinks a::after{
+    content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--accent);
+    transition:width .25s ease;
+  }
+  .navlinks a:hover::after{width:100%;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    padding-top:72px;
+    overflow:hidden;
+  }
+  .hero-doodles{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.9;}
+  .hero-doodles path, .hero-doodles circle, .hero-doodles rect{
+    stroke:var(--line-strong);
+    fill:none;
+    stroke-width:1.2;
+  }
+  .draw{
+    stroke-dasharray:600;
+    stroke-dashoffset:600;
+    animation:draw 2.6s ease forwards;
+  }
+  @keyframes draw{to{stroke-dashoffset:0;}}
+
+  .hero-inner{position:relative;z-index:2;padding:80px 0 60px;}
+  .eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+  .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px rgba(255,90,60,0.15);}
+  .hero h1{
+    font-size:clamp(46px,8vw,104px);
+    line-height:0.96;
+    font-weight:700;
+    margin-bottom:8px;
+    max-width:900px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:transparent;
+    -webkit-text-stroke:1.5px var(--ink);
+  }
+  .hero .role{
+    font-family:'JetBrains Mono',monospace;
+    font-size:clamp(14px,2vw,20px);
+    color:var(--accent-2);
+    margin-top:18px;
+    letter-spacing:0.02em;
+  }
+  .hero p.tagline{
+    max-width:520px;
+    margin-top:26px;
+    color:var(--ink-dim);
+    font-size:17px;
+    line-height:1.6;
+  }
+  .hero-cta{display:flex;gap:16px;margin-top:44px;flex-wrap:wrap;}
+  .btn{
+    font-family:'Inter',sans-serif;
+    font-weight:600;
+    font-size:14px;
+    padding:15px 28px;
+    border-radius:999px;
+    text-decoration:none;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    transition:transform .25s ease, background .25s ease, color .25s ease;
+    border:1px solid transparent;
+  }
+  .btn-primary{background:var(--accent);color:#100b09;}
+  .btn-primary:hover{transform:translateY(-2px);}
+  .btn-outline{border-color:var(--line-strong);color:var(--ink);}
+  .btn-outline:hover{border-color:var(--accent-2);color:var(--accent-2);transform:translateY(-2px);}
+
+  /* ---------- TIMELINE DIVIDER (signature element) ---------- */
+  .timeline-divider{
+    position:relative;
+    height:64px;
+    margin:0 auto;
+    max-width:1140px;
+    padding:0 32px;
+    display:flex;
+    align-items:center;
+  }
+  .timeline-track{
+    position:relative;
+    width:100%;
+    height:1px;
+    background:var(--line);
+  }
+  .timeline-track .tick{
+    position:absolute;top:-5px;width:1px;height:10px;background:var(--line-strong);
+  }
+  .timeline-track .playhead{
+    position:absolute;top:-6px;width:12px;height:12px;border-radius:2px;
+    background:var(--accent);
+    transform:translateX(-50%);
+    box-shadow:0 0 12px rgba(255,90,60,0.6);
+  }
+  .timeline-track .tc{
+    position:absolute;top:14px;left:0;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px;color:var(--ink-dim);
+    letter-spacing:0.05em;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{position:relative;padding:120px 0;z-index:1;}
+  .section-head{margin-bottom:64px;max-width:640px;}
+  .section-head h2{font-size:clamp(32px,5vw,50px);font-weight:600;margin-top:14px;}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:64px;
+    align-items:start;
+  }
+  .about-portrait{
+    aspect-ratio:1/1.1;
+    border:1px solid var(--line);
+    border-radius:18px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(160deg,var(--surface),var(--bg-alt));
+  }
+  .about-portrait svg{width:100%;height:100%;}
+  .about-copy p{color:var(--ink-dim);font-size:16.5px;line-height:1.85;margin-bottom:20px;}
+  .about-copy p strong{color:var(--ink);font-weight:600;}
+  .skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;}
+  .skill-chip{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12.5px;
+    padding:9px 16px;
+    border:1px solid var(--line-strong);
+    border-radius:999px;
+    color:var(--ink-dim);
+  }
+  .stats{display:flex;gap:48px;margin-top:44px;flex-wrap:wrap;}
+  .stat b{
+    font-family:'Space Grotesk',sans-serif;
+    font-size:38px;font-weight:700;display:block;color:var(--ink);
+  }
+  .stat span{font-size:13px;color:var(--ink-dim);}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:20px;
+    overflow:hidden;
+  }
+
+  /* ---------- WORKS ---------- */
+  .works-toolbar{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    margin-bottom:24px;
+  }
+  .works-toolbar .sort-box{
+    display:flex;align-items:center;gap:10px;
+    padding:10px 14px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:rgba(255,255,255,0.03);
+  }
+  .works-toolbar select{
+    background:transparent;
+    color:var(--ink);
+    border:none;
+    outline:none;
+    font-family:'Inter',sans-serif;
+    font-size:14px;
+    cursor:pointer;
+  }
+  .works-gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    gap:20px;
+    align-items:start;
+  }
+  .work-card{
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:12px;
+    background:linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    transition:transform .25s ease, border-color .25s ease;
+  }
+  .work-card:hover{transform:translateY(-4px);border-color:var(--accent);}
+  .work-media{
+    position:relative;
+    overflow:hidden;
+    border-radius:14px;
+    aspect-ratio:var(--ratio, 4 / 5);
+    background:var(--surface-2);
+  }
+  .work-media img{
+    width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease;
+  }
+  .work-card:hover .work-media img{transform:scale(1.04);}
+  .work-meta{padding:14px 4px 4px;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+  .work-meta h3{font-size:16px;margin-bottom:4px;}
+  .work-meta span{font-size:12px;color:var(--ink-dim);font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;}
+  .work-card button{
+    border:none;background:none;padding:0;cursor:pointer;width:100%;text-align:left;color:inherit;font:inherit;
+  }
+  .lightbox{
+    position:fixed;inset:0;background:rgba(5,5,8,0.92);display:none;align-items:center;justify-content:center;padding:24px;z-index:100;
+  }
+  .lightbox.active{display:flex;}
+  .lightbox img{
+    max-width:100%;max-height:100%;object-fit:contain;border-radius:16px;box-shadow:0 20px 80px rgba(0,0,0,0.45);
+  }
+  .lightbox-close{
+    position:absolute;top:24px;right:24px;border:none;background:rgba(255,255,255,0.12);color:white;
+    width:44px;height:44px;border-radius:50%;cursor:pointer;font-size:20px;
+  }
+  .service-card{
+    background:var(--bg);
+    padding:44px 40px;
+    position:relative;
+    transition:background .3s ease;
+  }
+  .service-card:hover{background:var(--bg-alt);}
+  .service-num{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;color:var(--accent-2);
+    margin-bottom:28px;display:block;
+  }
+  .service-icon{width:44px;height:44px;margin-bottom:22px;}
+  .service-icon svg{width:100%;height:100%;stroke:var(--ink);fill:none;stroke-width:1.3;}
+  .service-card h3{font-size:22px;font-weight:600;margin-bottom:12px;}
+  .service-card p{color:var(--ink-dim);font-size:15px;line-height:1.7;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-shell{
+    border:1px solid var(--line);
+    border-radius:24px;
+    padding:72px 56px;
+    background:radial-gradient(circle at 85% 15%, rgba(255,90,60,0.10), transparent 60%), var(--surface);
+    position:relative;
+    overflow:hidden;
+  }
+  .contact-shell h2{font-size:clamp(30px,5vw,48px);font-weight:600;max-width:640px;line-height:1.15;}
+  .contact-shell p{color:var(--ink-dim);margin-top:18px;max-width:480px;font-size:16px;line-height:1.7;}
+  .contact-links{
+    display:flex;flex-wrap:wrap;gap:16px;margin-top:44px;
+  }
+  .contact-pill{
+    display:flex;align-items:center;gap:12px;
+    padding:16px 24px;
+    border:1px solid var(--line-strong);
+    border-radius:14px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:border-color .25s ease, background .25s ease, transform .25s ease;
+    font-size:14.5px;
+  }
+  .contact-pill:hover{border-color:var(--accent);background:rgba(255,90,60,0.06);transform:translateY(-2px);}
+  .contact-pill .k{color:var(--ink-dim);font-family:'JetBrains Mono',monospace;font-size:11px;display:block;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:2px;}
+  .contact-pill .v{font-weight:500;}
+
+  .end{
+    text-align:center;
+    padding:40px 0 48px;
+    color:var(--ink-dim);
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.05em;
+  }
+
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr;}
+    .about-portrait{max-width:280px;}
+    .services-grid{grid-template-columns:1fr;}
+    .works-gallery{grid-template-columns:1fr;}
+    .navlinks{display:none;}
+    .contact-shell{padding:48px 26px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="logo"><span></span></div>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#works">Works</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <svg class="hero-doodles" viewBox="0 0 1140 760" preserveAspectRatio="xMidYMid slice">
+    <!-- pen tool path with bezier handles -->
+    <path class="draw" d="M120 560 C 220 420, 300 640, 420 480 S 620 300, 760 470" style="animation-delay:.1s"/>
+    <circle cx="120" cy="560" r="4" fill="var(--accent)" stroke="none"/>
+    <circle cx="420" cy="480" r="4" fill="var(--ink)" stroke="none"/>
+    <circle cx="760" cy="470" r="4" fill="var(--accent-2)" stroke="none"/>
+    <line x1="120" y1="560" x2="220" y2="420" stroke="var(--line)"/>
+    <line x1="420" y1="480" x2="300" y2="640" stroke="var(--line)"/>
+    <!-- film frame corner marks -->
+    <path class="draw" d="M900 90 h48 v48" style="animation-delay:.4s"/>
+    <path class="draw" d="M900 300 h48 v-48" style="animation-delay:.5s"/>
+    <!-- color swatches -->
+    <circle class="draw" cx="980" cy="200" r="26" style="animation-delay:.6s"/>
+    <circle class="draw" cx="1020" cy="230" r="14" style="animation-delay:.8s"/>
+    <!-- crop marks -->
+    <path class="draw" d="M60 120 v24 M48 132 h24" style="animation-delay:.3s"/>
+    <!-- play triangle -->
+    <path class="draw" d="M840 620 l40 24 l-40 24 z" style="animation-delay:.7s"/>
+    <!-- scattered anchor nodes -->
+    <rect class="draw" x="540" y="120" width="10" height="10" style="animation-delay:.2s"/>
+    <rect class="draw" x="600" y="150" width="10" height="10" style="animation-delay:.35s"/>
+  </svg>
+
+  <div class="wrap hero-inner">
+    <h1>MUHAMMED<br>AMEEN <em>CP</em></h1>
+    <div class="role">// GRAPHIC DESIGNER</div>
+    <p class="tagline">I design brand visuals and cut video stories that hold attention — from static frame to final render. Clean concepts, considered motion, work that reads at a glance.</p>
+    <div class="hero-cta">
+      <a href="#services" class="btn btn-primary">View services</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+  </div>
+</header>
+
+<div class="timeline-divider" aria-hidden="true">
+  <div class="timeline-track" id="timelineTrack"></div>
+</div>
+
+<section id="about">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <span class="label">01 — About</span>
+      <h2>Designs with intent,<br>edits with rhythm.</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-portrait">
+        <svg viewBox="0 0 340 380" xmlns="http://www.w3.org/2000/svg">
+          <rect width="340" height="380" fill="none"/>
+          <path d="M170 60 C120 60 90 100 90 150 C90 210 120 240 170 240 C220 240 250 210 250 150 C250 100 220 60 170 60 Z" stroke="var(--line-strong)" fill="none" stroke-width="1.4"/>
+          <path d="M60 360 C60 280 110 250 170 250 C230 250 280 280 280 360" stroke="var(--line-strong)" fill="none" stroke-width="1.4"/>
+          <circle cx="140" cy="140" r="4" fill="var(--accent-2)"/>
+          <circle cx="205" cy="140" r="4" fill="var(--accent-2)"/>
+          <path d="M135 185 Q170 205 205 185" stroke="var(--line-strong)" fill="none" stroke-width="1.4"/>
+          <path d="M20 40 h30 M35 25 v30" stroke="var(--accent)" stroke-width="1.4"/>
+          <path d="M300 330 h26 M313 317 v26" stroke="var(--accent)" stroke-width="1.4"/>
+          <circle cx="300" cy="60" r="18" stroke="var(--line)" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="about-copy">
+        <p><strong>Muhammed Ameen CP</strong> is a graphic designer working across brand identity, social creatives, and short-form video. He treats every brief as a small production — concept, layout, motion, delivery — and keeps the process tight from first sketch to final export.</p>
+        <p>His work moves comfortably between still and motion: a logo system in the morning, a reels edit with color grading and sound design by evening. The throughline is craft — clean composition, deliberate pacing, and files that are actually easy to open and edit later.</p>
+        <div class="skills">
+          <span class="skill-chip">Photoshop</span>
+          <span class="skill-chip">Illustrator</span>
+          <span class="skill-chip">Premiere Pro</span>
+          <span class="skill-chip">After Effects</span>
+          <span class="skill-chip">CapCut</span>
+          <span class="skill-chip">Brand Identity</span>
+          <span class="skill-chip">Color Grading</span>
+          <span class="skill-chip">Social Creatives</span>
+        </div>
+        <div class="stats">
+          <div class="stat"><b>50+</b><span>Happy Clients</span></div>
+          <div class="stat"><b>100+</b><span>Projects delivered</span></div>
+          <div class="stat"><b>24H</b><span>Typical turnaround</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="timeline-divider" aria-hidden="true">
+  <div class="timeline-track"></div>
+</div>
+
+<section id="services">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <span class="label">02 — Services</span>
+      <h2>What he can make for you.</h2>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><path d="M6 40 L20 8 L28 8 L42 40" stroke-linejoin="round"/><path d="M14 28 h20" /></svg>
+        </div>
+        <h3>Brand &amp; Graphic Design</h3>
+        <p>Logos, brand marks, posters, and print-ready layouts built around a clear visual identity.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><rect x="4" y="10" width="40" height="26" rx="3"/><path d="M20 20 l10 6 l-10 6 z"/></svg>
+        </div>
+
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="16"/><path d="M24 8 v16 l12 8"/></svg>
+        </div>
+        <h3>Mockup Design</h3>
+        <p>Realistic product mockups and concept art for marketing materials and presentations.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-num">04</span>
+        <div class="service-icon">
+          <svg viewBox="0 0 48 48"><rect x="6" y="6" width="16" height="16" rx="2"/><rect x="26" y="6" width="16" height="16" rx="2"/><rect x="6" y="26" width="16" height="16" rx="2"/><rect x="26" y="26" width="16" height="16" rx="2"/></svg>
+        </div>
+        <h3>Social Media Creatives</h3>
+        <p>Consistent, scroll-stopping post and story templates designed for a full content calendar.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="timeline-divider" aria-hidden="true">
+  <div class="timeline-track"></div>
+</div>
+
+<section id="works">
+  <div class="wrap reveal">
+    <div class="section-head">
+      <span class="label">03 — Works</span>
+      <h2>Selected work.</h2>
+    </div>
+    <div class="works-toolbar">
+      <div class="sort-box">
+        <label for="worksSort" class="label" style="margin:0;">Sort</label>
+        <select id="worksSort">
+          <option value="latest">Latest</option>
+          <option value="oldest">Oldest</option>
+          <option value="random">Random</option>
+        </select>
+      </div>
+    </div>
+    <div id="worksGallery" class="works-gallery"></div>
+  </div>
+</section>
+
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lightbox-close" aria-label="Close preview">×</button>
+  <img id="lightboxImage" src="" alt="Preview">
+</div>
+
+<div class="timeline-divider" aria-hidden="true">
+  <div class="timeline-track"></div>
+</div>
+
+<section id="contact">
+  <div class="wrap reveal">
+    <div class="contact-shell">
+      <span class="label">04 — Contact</span>
+      <h2 style="margin-top:16px;">Have a project in mind?<br>Let's put it into frame.</h2>
+      <p>Reach out directly — no forms, no waiting. Ameen replies to most messages within a day.</p>
+      <div class="contact-links">
+        <a class="contact-pill" href="mailto:muhammedameen68006@gmail.com">
+          <span><span class="k">Email</span><span class="v">muhammedameen68006@gmail.com</span></span>
+        </a>
+        <a class="contact-pill" href="tel:+919188756947">
+          <span><span class="k">Phone</span><span class="v">+91 9188756947</span></span>
+        </a>
+        <a class="contact-pill" href="https://instagram.com" target="_blank" rel="noopener">
+          <span><span class="k">Instagram</span><span class="v">@am_e_ii</span></span>
+        </a>
+    </div>
+  </div>
+</section>
+
+<div class="end"></div>
+
+<script>
+  // scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  }, {threshold:0.15});
+  reveals.forEach(el=>io.observe(el));
+
+  // build timeline ticks + animate playhead on scroll for each divider
+  document.querySelectorAll('.timeline-track').forEach((track, idx)=>{
+    const tickCount = 24;
+    for(let i=0;i<=tickCount;i++){
+      const t = document.createElement('div');
+      t.className='tick';
+      t.style.left = (i/tickCount*100)+'%';
+      track.appendChild(t);
+    }
+    const playhead = document.createElement('div');
+    playhead.className='playhead';
+    track.appendChild(playhead);
+    const tc = document.createElement('div');
+    tc.className='tc';
+    tc.textContent = '00:0'+ (idx) +':00';
+    track.appendChild(tc);
+
+    let pos = 0;
+    const animate = ()=>{
+      pos += 0.15;
+      if(pos>100) pos=0;
+      playhead.style.left = pos+'%';
+      const secs = Math.floor(pos/100*59);
+      tc.textContent = '00:'+String(secs).padStart(2,'0')+':00';
+      requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  });
+
+  // dynamic works gallery
+  const works = [
+    {title:'', category:'', year:'1', ratio:'4 / 5', image:'bir.jpg'},
+    {title:'', category:'', year:'2', ratio:'3 / 4', image:'ICF.jpg'},
+    {title:'', category:'', year:'3', ratio:'4 / 5', image:'poster.jpg'},
+    {title:'', category:'', year:'4', ratio:'4 / 5', image:'final.jpeg'},
+    {title:'', category:'', year:'5', ratio:'4 / 5', image:'sahi.jpeg'},
+    {title:'', category:'', year:'6', ratio:'4 / 5', image:'sahi2.jpeg'},
+    ];
+
+  const gallery = document.getElementById('worksGallery');
+  const sortSelect = document.getElementById('worksSort');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImage = document.getElementById('lightboxImage');
+  const closeBtn = document.querySelector('.lightbox-close');
+
+  function renderWorks(mode='latest') {
+    let items = [...works];
+
+    if (mode === 'oldest') {
+      items.sort((a, b) => Number(a.year) - Number(b.year));
+    } else if (mode === 'random') {
+      items.sort(() => Math.random() - 0.5);
+    } else {
+      items.sort((a, b) => Number(b.year) - Number(a.year));
+    }
+
+    gallery.innerHTML = items.map(item => `
+      <article class="work-card">
+        <button type="button" class="work-trigger" data-image="${item.image}" data-title="${item.title}">
+          <div class="work-media" style="--ratio:${item.ratio}">
+            <img src="${item.image}" alt="${item.title}" loading="lazy">
+          </div>
+          <div class="work-meta">
+            <div>
+              <h3>${item.title}</h3>
+              <span>${item.category}</span>
+            </div>
+            <span>${item.year}</span>
+          </div>
+        </button>
+      </article>
+    `).join('');
+  }
+
+  function openLightbox(imageSrc, title) {
+    lightboxImage.src = imageSrc;
+    lightboxImage.alt = title;
+    lightbox.classList.add('active');
+    lightbox.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('active');
+    lightbox.setAttribute('aria-hidden', 'true');
+  }
+
+  gallery.addEventListener('click', (event) => {
+    const trigger = event.target.closest('.work-trigger');
+    if (!trigger) return;
+    openLightbox(trigger.dataset.image, trigger.dataset.title);
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeLightbox();
+  });
+
+  sortSelect.addEventListener('change', (event) => renderWorks(event.target.value));
+  renderWorks();
+</script>
+
+</body>
+</html>
